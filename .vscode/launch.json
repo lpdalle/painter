@@ -1,0 +1,13 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "queue_start",
+            "type": "python",
+            "request": "launch",
+            "module": "painter",
+            "console": "internalConsole",
+            "justMyCode": true
+        }
+    ]
+}
