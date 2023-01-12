@@ -11,9 +11,9 @@ logging.basicConfig(
 
 
 def main():
-    api.task.acquire()
+    gen_uid = api.task.acquire()
     time.sleep(5)
-    api.task.complete(uid=1)
+    api.task.complete(uid=gen_uid)
 
 
 if __name__ == '__main__':

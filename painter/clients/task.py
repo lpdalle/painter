@@ -10,6 +10,7 @@ class TaskClient:
         headers = {'Contet-Type': 'application/json'}
         response = httpx.put(url, headers=headers)
         response.raise_for_status()
+        return response.json()['uid']
 
     def complete(self, uid: int):
         url = f'{self.url}/api/v1/generation/{uid}/complete'
