@@ -9,7 +9,7 @@ class TaskClient:
         url = f'{self.url}/api/v1/generation/acquire'
         headers = {'Contet-Type': 'application/json'}
         response = httpx.put(url, headers=headers)
-        if response.status_code == 422:  # noqa: WPS432
+        if not response.json():
             return 0
         return response.json()['uid']
 
