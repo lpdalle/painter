@@ -9,12 +9,10 @@ class TaskClient:
         url = f'{self.url}/api/v1/generation/acquire'
         headers = {'Contet-Type': 'application/json'}
         response = httpx.put(url, headers=headers)
-        response.raise_for_status()
+        if response.status_code == 422:  # noqa: WPS432
+            return 0
         return response.json()['uid']
 
     def complete(self, uid: int):
         url = f'{self.url}/api/v1/generation/{uid}/complete'
-        response = httpx.put(url)
-        if response.status_code == 404:  # noqa: WPS432
-            return None
-        return response.json()
+        httpx.put(url)

@@ -11,9 +11,18 @@ logging.basicConfig(
 
 
 def main():
-    gen_uid = api.task.acquire()
-    time.sleep(5)
-    api.task.complete(uid=gen_uid)
+    task = True
+
+    while task:
+        time.sleep(3)
+
+        gen_uid = api.task.acquire()
+        if not gen_uid:
+            logger.info('All tasks done!')
+            task = False
+            return
+        time.sleep(5)
+        api.task.complete(uid=gen_uid)
 
 
 if __name__ == '__main__':
