@@ -7,14 +7,13 @@ class TaskClient:
     def __init__(self, url) -> None:
         self.url = url
 
-    def acquire(self):
+    def acquire(self) -> Task | None:
         url = f'{self.url}/api/v1/generation/acquire'
         response = httpx.post(url)
         if not response.json():
             return None
-        task = Task(**response.json())
-        return task.uid
+        return Task(**response.json())
 
-    def complete(self, uid: int):
+    def complete(self, uid: int) -> None:
         url = f'{self.url}/api/v1/generation/{uid}/complete'
         httpx.post(url)

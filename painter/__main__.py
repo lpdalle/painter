@@ -15,12 +15,13 @@ def main():
     while True:
         time.sleep(3)
 
-        gen_uid = api.task.acquire()
-        if not gen_uid:
+        task = api.task.acquire()
+        if not task:
             logger.info('All tasks done!')
             return
         time.sleep(5)
-        api.task.complete(uid=gen_uid)
+        api.task.complete(uid=task.uid)
+        logger.info(f'Task [{task.prompt}] done!')
 
 
 if __name__ == '__main__':
