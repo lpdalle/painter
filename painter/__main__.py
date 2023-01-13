@@ -11,15 +11,15 @@ logging.basicConfig(
 
 
 def main():
-
+    sleep_interval = 3
     while True:
-        time.sleep(3)
-
         task = api.task.acquire()
+        time.sleep(sleep_interval)
+
         if not task:
             logger.info('All tasks done!')
             return
-        time.sleep(5)
+        time.sleep(sleep_interval)
         api.task.complete(uid=task.uid)
         logger.info(f'Task [{task.prompt}] done!')
 

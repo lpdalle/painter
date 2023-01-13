@@ -4,7 +4,7 @@ from painter.clients.schema import Task
 
 
 class TaskClient:
-    def __init__(self, url) -> None:
+    def __init__(self, url: str) -> None:
         self.url = url
 
     def acquire(self) -> Task | None:
