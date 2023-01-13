@@ -1,5 +1,7 @@
 import httpx
 
+from painter.clients.schema import Task
+
 
 class TaskClient:
     def __init__(self, url) -> None:
@@ -7,11 +9,11 @@ class TaskClient:
 
     def acquire(self):
         url = f'{self.url}/api/v1/generation/acquire'
-        headers = {'Contet-Type': 'application/json'}
-        response = httpx.post(url, headers=headers)
+        response = httpx.post(url)
         if not response.json():
-            return 0
-        return response.json()['uid']
+            return None
+        task = Task(**response.json())
+        return task.uid
 
     def complete(self, uid: int):
         url = f'{self.url}/api/v1/generation/{uid}/complete'
