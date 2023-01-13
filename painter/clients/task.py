@@ -8,11 +8,11 @@ class TaskClient:
     def acquire(self):
         url = f'{self.url}/api/v1/generation/acquire'
         headers = {'Contet-Type': 'application/json'}
-        response = httpx.put(url, headers=headers)
+        response = httpx.post(url, headers=headers)
         if not response.json():
             return 0
         return response.json()['uid']
 
     def complete(self, uid: int):
         url = f'{self.url}/api/v1/generation/{uid}/complete'
-        httpx.put(url)
+        httpx.post(url)
