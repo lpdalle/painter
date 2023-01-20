@@ -6,10 +6,10 @@ authors = ["Artem Voskresensky <metravs@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.11"
-python-worker = "^2.1.1"
+python = "3.10.9"
 httpx = "^0.23.3"
 pydantic = "^1.10.4"
+cython = "^0.29.33"
 
 
 [tool.poetry.group.dev.dependencies]

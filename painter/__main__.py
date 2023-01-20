@@ -1,7 +1,8 @@
 import logging
-import time
+from time import sleep
 
 from painter.clients.api import api
+from painter.clients.generation import start
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(
@@ -11,15 +12,18 @@ logging.basicConfig(
 
 
 def main():
-    sleep_interval = 3
-    while True:
+    sleep_time = 5
+    is_working = True
+    while is_working:
         task = api.task.acquire()
-        time.sleep(sleep_interval)
 
         if not task:
-            logger.info('All tasks done!')
-            return
-        time.sleep(sleep_interval)
+            logger.info('No new task found')
+            sleep(sleep_time)
+            continue
+
+        logger.info(f'Task [{task.prompt}] has started')
+        start(text=task.prompt)
         api.task.complete(uid=task.uid)
         logger.info(f'Task [{task.prompt}] done!')
 
