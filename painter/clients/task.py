@@ -8,12 +8,12 @@ class TaskClient:
         self.url = url
 
     def acquire(self) -> Task | None:
-        url = f'{self.url}/api/v1/generation/acquire'
+        url = f'{self.url}/api/v1/generations/acquire'
         response = httpx.post(url)
         if not response.json():
             return None
         return Task(**response.json())
 
     def complete(self, uid: int) -> None:
-        url = f'{self.url}/api/v1/generation/{uid}/complete'
+        url = f'{self.url}/api/v1/generations/{uid}/complete'
         httpx.post(url)

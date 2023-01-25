@@ -3,6 +3,7 @@ from time import sleep
 
 from painter.clients.api import api
 from painter.clients.generation import start
+from painter.server import upload
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(
@@ -24,6 +25,7 @@ def main():
 
         logger.info(f'Task [{task.prompt}] has started')
         start(text=task.prompt)
+        upload(task.uid)
         api.task.complete(uid=task.uid)
         logger.info(f'Task [{task.prompt}] done!')
 
