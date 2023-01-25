@@ -1,26 +1,21 @@
 import logging
+from pathlib import Path
 
 import httpx
 
-from painter.config import UPLOAD_FOLDER
+from painter.config import BACKEND_URL, UPLOAD_FOLDER
 
 
 def upload(uid: int):
-    with open(f'{UPLOAD_FOLDER}/img_0.png', 'rb') as file:
-        image = file.read()
-        logging.info('Sending file: {0}'.format(file))
-        header = {'Content-Type': 'image/png'}
+    logging.info('Sending file')
+    file_path = Path(f'{UPLOAD_FOLDER}/img_0.png')
+    with open(file_path, 'rb') as fs:
+        files = {'file': fs}
         response = httpx.post(
-            f'http://127.0.0.1:5000/api/v1/generation/{uid}/images/',
-            data=image,
-            headers=header,
+            f'{BACKEND_URL}/v1/generations/{uid}/images/',
+            files=files,
+            timeout=10,
         )
         response.raise_for_status()
-        if response.status_code == 404:  # noqa: WPS432
-            return logging.info('Error uploading file!')
-
+        file_path.unlink()
         return logging.info('File uploaded!')
-
-
-if __name__ == '__main__':
-    upload(5)
