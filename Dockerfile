@@ -11,6 +11,8 @@ ENV PATH="/root/.cargo/bin:$PATH"
 
 RUN pip install rudalle
 
+RUN pip install httpx
+
 COPY painter /app/painter
 
 CMD ["python", "-m", "painter"]
