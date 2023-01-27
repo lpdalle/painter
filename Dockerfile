@@ -12,6 +12,7 @@ ENV PATH="/root/.cargo/bin:$PATH"
 RUN pip install rudalle
 
 RUN pip install httpx
+RUN pip install pydantic
 
 COPY painter /app/painter
 
