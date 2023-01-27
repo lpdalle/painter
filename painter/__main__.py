@@ -13,7 +13,7 @@ logging.basicConfig(
 
 
 def main():
-    sleep_time = 5
+    sleep_time = 10
     is_working = True
     while is_working:
         task = api.task.acquire()
