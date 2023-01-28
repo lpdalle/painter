@@ -1,6 +1,5 @@
 from painter.clients.task import TaskClient
-
-base_url = 'http://127.0.0.1:5000'
+from painter.config import conf
 
 
 class ApiClients:
@@ -8,4 +7,4 @@ class ApiClients:
         self.task = TaskClient(url)
 
 
-api = ApiClients(base_url)
+api = ApiClients(conf.backend_url)
