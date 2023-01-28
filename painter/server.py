@@ -12,7 +12,7 @@ def upload(uid: int):
     with open(file_path, 'rb') as fs:
         files = {'file': fs}
         response = httpx.post(
-            f'{conf.backend_url}/v1/generations/{uid}/images/',
+            f'{conf.backend_url}/api/v1/generations/{uid}/images/',
             files=files,
             timeout=10,
         )
